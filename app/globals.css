@@ -345,3 +345,118 @@ input.shelf {
   gap: 8px;
   margin-top: 14px;
 }
+
+/* cultural thread */
+.chip {
+  display: inline-block;
+  font-size: 12px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #0b0d11;
+  color: var(--muted);
+}
+
+.pick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.thread-panel {
+  border-top: 3px solid var(--accent);
+}
+
+.thread-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 20px;
+}
+
+.chip.big {
+  font-size: 14px;
+  padding: 6px 12px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: chipIn 0.5s ease forwards;
+}
+
+.chip.big em {
+  display: block;
+  font-style: normal;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.55;
+  margin-top: 2px;
+}
+
+@keyframes chipIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.kind-mood {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--accent);
+}
+.kind-theme {
+  border-color: color-mix(in srgb, var(--ok) 55%, transparent);
+  color: var(--ok);
+}
+.kind-archetype {
+  border-color: color-mix(in srgb, var(--warn) 60%, transparent);
+  color: var(--warn);
+}
+.kind-character {
+  border-color: #c084fc66;
+  color: #c084fc;
+}
+.kind-genre,
+.kind-audience {
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.thread-links {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.thread-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.thread-fav {
+  min-width: 120px;
+  font-weight: 600;
+}
+
+.weight-bar {
+  flex: 0 0 90px;
+  height: 6px;
+  background: #0b0d11;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.weight-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.6s ease;
+}
+
+.thread-shared {
+  flex: 1;
+}

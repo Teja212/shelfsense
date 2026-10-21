@@ -118,3 +118,47 @@ export async function rankBooks(
     explain: e.query?.explainability ?? e.explainability ?? null,
   }));
 }
+
+export type QlooTag = { id: string; name: string; kind: string };
+
+// Map a tag's facet to a display "kind", keeping only cultural namespaces
+// (qloo/media/music) and dropping business/place noise (place/brand). Tag ids
+// look like urn:tag:<facet>:<namespace>:<slug>.
+const FACET_KIND: Record<string, string> = {
+  style: "mood",
+  archetype: "archetype",
+  character: "character",
+  theme: "theme",
+  keyword: "theme",
+  genre: "genre",
+  audience: "audience",
+  subgenre: "genre",
+};
+
+function tagKind(id: string): string | null {
+  const parts = id.split(":"); // ["urn","tag",facet,namespace,...]
+  const facet = parts[2];
+  const namespace = parts[3];
+  if (!facet || !namespace) return null;
+  if (namespace !== "qloo" && namespace !== "media" && namespace !== "music") return null;
+  return FACET_KIND[facet] ?? "theme";
+}
+
+/** Cultural tags most associated with an entity (noise filtered out). */
+export async function entityTags(entityId: string, take = 30): Promise<QlooTag[]> {
+  const body = await qloo("/v2/insights", {
+    "filter.type": "urn:tag",
+    "signal.interests.entities": entityId,
+    take,
+  });
+  const arr = body?.results?.tags || body?.results?.entities || body?.results || [];
+  const out: QlooTag[] = [];
+  for (const t of Array.isArray(arr) ? arr : []) {
+    const id = t.tag_id || t.id || t.entity_id;
+    if (!id) continue;
+    const kind = tagKind(id);
+    if (!kind) continue;
+    out.push({ id, name: t.name || id, kind });
+  }
+  return out;
+}

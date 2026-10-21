@@ -1,6 +1,7 @@
 import { search, rankBooks, type RankedBook } from "./qloo";
 import { loadInventory, type Book } from "./inventory";
 import { llmAvailable, applyConstraints, groundedWhys } from "./llm";
+import { buildThreads, type Thread } from "./thread";
 
 // The ShelfSense agent. An async generator that yields its reasoning steps as
 // it works, then a final result. Every pick is grounded in Qloo data and real
@@ -32,6 +33,7 @@ export type AgentPick = {
 export type AgentEvent =
   | { type: "step"; text: string; detail?: string }
   | { type: "result"; picks: AgentPick[]; note?: string }
+  | { type: "threads"; threads: Record<string, Thread> }
   | { type: "error"; text: string };
 
 const typeLabel = (types: string[]) => (types[0] || "").split(":").pop() || "item";
@@ -254,4 +256,21 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
   }
 
   yield { type: "result", picks };
+
+  // 7. The cultural thread — the real shared Qloo tags linking the favorites to
+  // each pick. Streamed after the picks so it animates in as a reveal.
+  if (picks.length) {
+    yield { type: "step", text: "Tracing the cultural threads behind each pick…" };
+    try {
+      const byId = new Map(enriched.map((e) => [e.id, e] as const));
+      const threads = await buildThreads({
+        favIds: signalIds,
+        favLabelById,
+        picks: picks.map((p) => ({ qlooId: p.qlooId, explain: byId.get(p.qlooId)?.explain })),
+      });
+      yield { type: "threads", threads };
+    } catch {
+      // The thread is a bonus; never fail the run over it.
+    }
+  }
 }

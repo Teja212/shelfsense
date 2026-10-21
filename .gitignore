@@ -20,5 +20,8 @@ next-env.d.ts
 # internal planning doc — not for the public repo
 /PLAN.md
 
+# throwaway de-risk spike
+/qloo-tags-spike.mjs
+
 # misc
 .DS_Store

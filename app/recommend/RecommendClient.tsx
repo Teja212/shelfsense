@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import type { AgentEvent, AgentPick } from "@/lib/agent";
+import type { Thread } from "@/lib/thread";
 
 type Step = { text: string; detail?: string };
 
@@ -11,15 +12,30 @@ const CAT_CLASS: Record<AgentPick["category"], string> = {
   Adventurous: "cat-adv",
 };
 
+function uniqueSharedTags(thread: Thread) {
+  const seen = new Set<string>();
+  const out: { name: string; kind: string }[] = [];
+  for (const link of thread.links) {
+    for (const t of link.sharedTags) {
+      const k = t.name.toLowerCase();
+      if (seen.has(k)) continue;
+      seen.add(k);
+      out.push(t);
+    }
+  }
+  return out;
+}
+
 const CHIPS = ["Shorter", "Less dark", "More upbeat", "Something weirder"];
 
 export default function RecommendClient() {
-  const [favorites, setFavorites] = useState<string[]>(["Interstellar", "Radiohead", "Gillian Flynn"]);
+  const [favorites, setFavorites] = useState<string[]>(["The Matrix", "Daft Punk", "William Gibson"]);
   const [budget, setBudget] = useState("25");
   const [preferences, setPreferences] = useState("");
 
   const [steps, setSteps] = useState<Step[]>([]);
   const [picks, setPicks] = useState<AgentPick[] | null>(null);
+  const [threads, setThreads] = useState<Record<string, Thread>>({});
   const [note, setNote] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [running, setRunning] = useState(false);
@@ -42,6 +58,7 @@ export default function RecommendClient() {
     setRunning(true);
     setSteps([]);
     setPicks(null);
+    setThreads({});
     setNote(null);
     setError(null);
     try {
@@ -69,6 +86,8 @@ export default function RecommendClient() {
           } else if (ev.type === "result") {
             setPicks(ev.picks);
             if (ev.note) setNote(ev.note);
+          } else if (ev.type === "threads") {
+            setThreads(ev.threads);
           } else if (ev.type === "error") {
             setError(ev.text);
           }
@@ -216,6 +235,18 @@ export default function RecommendClient() {
                 <div className="pick-why">
                   {p.why} <span className="tag ok">via Qloo</span>
                 </div>
+                {threads[p.qlooId] && (
+                  <div className="pick-tags">
+                    {(uniqueSharedTags(threads[p.qlooId]).length > 0
+                      ? uniqueSharedTags(threads[p.qlooId]).slice(0, 4)
+                      : threads[p.qlooId].bookTags.slice(0, 4)
+                    ).map((t, i) => (
+                      <span className={"chip kind-" + t.kind} key={i}>
+                        {t.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
                 <div className="pick-actions">
                   <button className="btn" onClick={() => alreadyRead(p)} disabled={running}>
                     Already read it
@@ -227,6 +258,64 @@ export default function RecommendClient() {
               </div>
             ))}
           </div>
+
+          {picks[0] &&
+            (() => {
+              // Feature whichever pick has the richest thread (most shared tags).
+              let hero = picks[0];
+              let heroN = threads[hero.qlooId] ? uniqueSharedTags(threads[hero.qlooId]).length : -1;
+              for (const p of picks) {
+                const n = threads[p.qlooId] ? uniqueSharedTags(threads[p.qlooId]).length : -1;
+                if (n > heroN) {
+                  hero = p;
+                  heroN = n;
+                }
+              }
+              const th = threads[hero.qlooId];
+              if (!th) return null;
+              const shared = uniqueSharedTags(th);
+              const cloud = th.mode === "tags" ? shared : th.bookTags.slice(0, 8);
+              const maxW = Math.max(0.0001, ...th.links.map((l) => l.weight));
+              return (
+                <div className="panel thread-panel">
+                  <h2>The cultural thread</h2>
+                  <p className="muted" style={{ marginTop: -4 }}>
+                    Why <strong style={{ color: "var(--text)" }}>{hero.title}</strong> connects to your
+                    taste — {th.mode === "tags" ? "real shared tags from Qloo’s graph." : "ranked by Qloo taste affinity."}
+                  </p>
+                  {th.mode === "attribution" && (
+                    <p className="muted" style={{ fontSize: 13 }}>
+                      No shared tags surfaced for this title — the book&apos;s own vibe:
+                    </p>
+                  )}
+                  <div className="thread-cloud">
+                    {cloud.map((t, i) => (
+                      <span
+                        className={"chip big kind-" + t.kind}
+                        key={i}
+                        style={{ animationDelay: `${i * 70}ms` }}
+                      >
+                        {t.name}
+                        <em>{t.kind}</em>
+                      </span>
+                    ))}
+                  </div>
+                  <div className="thread-links">
+                    {th.links.map((l, i) => (
+                      <div className="thread-link" key={i}>
+                        <span className="thread-fav">{l.favorite}</span>
+                        <span className="weight-bar">
+                          <span style={{ width: `${Math.round((l.weight / maxW) * 100)}%` }} />
+                        </span>
+                        <span className="muted thread-shared">
+                          {l.sharedTags.length ? l.sharedTags.map((t) => t.name).join(" · ") : "—"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
 
           {started && (
             <div className="panel">
