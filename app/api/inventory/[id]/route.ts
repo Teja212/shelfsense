@@ -4,6 +4,12 @@ import { updateBook, type Book } from "@/lib/inventory";
 export const dynamic = "force-dynamic";
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  // Owner-only. When OWNER_KEY is set (production), the request must carry it;
+  // left unset locally so dev just works.
+  const OWNER_KEY = process.env.OWNER_KEY;
+  if (OWNER_KEY && req.headers.get("x-owner-key") !== OWNER_KEY) {
+    return NextResponse.json({ error: "owner key required" }, { status: 403 });
+  }
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const patch: Partial<Book> = {};

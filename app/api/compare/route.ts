@@ -74,20 +74,22 @@ export async function POST(req: Request) {
       budget: budget || undefined,
       inventory: eligible.map((b) => ({ title: b.title, author: b.author })),
     });
-    const findBook = (title: string) =>
-      eligible.find(
-        (b) => b.title.toLowerCase() === title.toLowerCase() || b.title.toLowerCase().includes(title.toLowerCase())
+    const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const findBook = (title: string) => {
+      const n = norm(title);
+      return (
+        eligible.find((b) => norm(b.title) === n) ||
+        eligible.find((b) => norm(b.title).includes(n) || n.includes(norm(b.title)))
       );
-    llm = (picks || []).map((p) => {
+    };
+    // Only keep LLM picks that map to a real in-stock book, so both columns show
+    // identical fields (title, author, price, shelf) — a fair comparison.
+    const mapped: Pick[] = [];
+    for (const p of picks || []) {
       const b = findBook(p.title);
-      return {
-        title: b?.title || p.title,
-        author: b?.author || "",
-        price: b?.price ?? null,
-        shelf: b?.shelf ?? null,
-        why: p.why,
-      };
-    });
+      if (b) mapped.push({ title: b.title, author: b.author, price: b.price, shelf: b.shelf, why: p.why });
+    }
+    llm = mapped.slice(0, 3);
   }
 
   return NextResponse.json({ qloo, llm, llmAvailable: llmAvailable() });

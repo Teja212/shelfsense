@@ -10,6 +10,7 @@ export type Book = {
   price: number;
   stock: number;
   shelf: string;
+  pages: number;
   // Qloo resolution (filled by scripts/resolve-inventory.mjs)
   qlooId: string | null;
   qlooName: string | null;

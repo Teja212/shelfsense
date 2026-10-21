@@ -1,6 +1,6 @@
 import { search, rankBooks, type RankedBook } from "./qloo";
 import { loadInventory, type Book } from "./inventory";
-import { llmAvailable, applyConstraints, groundedWhys } from "./llm";
+import { llmAvailable, planConstraints, groundedWhys } from "./llm";
 import { buildThreads, type Thread } from "./thread";
 
 // The ShelfSense agent. An async generator that yields its reasoning steps as
@@ -198,7 +198,7 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
     const before = enriched.length;
     enriched = enriched.filter((e) => !ex.has(e.id));
     if (before > enriched.length) {
-      yield { type: "step", text: `Set aside ${before - enriched.length} you've already read.` };
+      yield { type: "step", text: `Set aside ${before - enriched.length} you've ruled out.` };
     }
   }
 
@@ -207,27 +207,64 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
     return;
   }
 
-  // 5. Apply the reader's soft constraints with the LLM (if configured).
+  // 5. Turn the request into hard constraints (applied here, deterministically)
+  // plus a soft ordering (from the model). Hard constraints MUST be honored.
   if (request) {
     if (llmAvailable()) {
       yield { type: "step", text: `Reasoning over your request: "${request}"…` };
       try {
-        const r = await applyConstraints({
+        const plan = await planConstraints({
           favorites: favLabels,
           request,
           candidates: enriched.map((e) => ({
             qlooId: e.id,
             title: e.book.title,
             author: e.book.author,
+            price: e.book.price,
+            pages: e.book.pages,
             affinity: e.affinity ?? 0,
           })),
         });
-        if (r) {
-          const order = new Map(r.orderedQlooIds.map((id, i) => [id, i] as const));
-          enriched = [...enriched].sort(
-            (a, b) => (order.get(a.id) ?? 999) - (order.get(b.id) ?? 999)
-          );
-          yield { type: "step", text: "Adjusted the shortlist for your request.", detail: r.rationale };
+        if (plan) {
+          const h = plan.hard || {};
+          const inc = (h.authorsInclude || []).map((s) => s.toLowerCase());
+          const exc = (h.authorsExclude || []).map((s) => s.toLowerCase());
+          const exTitles = (h.excludeTitles || []).map((s) => s.toLowerCase());
+          const match = (a: string, list: string[]) =>
+            list.some((x) => a.toLowerCase().includes(x) || x.includes(a.toLowerCase()));
+
+          const before = enriched.length;
+          let filtered = enriched.filter((e) => {
+            if (inc.length && !match(e.book.author, inc)) return false;
+            if (exc.length && match(e.book.author, exc)) return false;
+            if (exTitles.length && match(e.book.title, exTitles)) return false;
+            if (typeof h.maxPrice === "number" && e.book.price > h.maxPrice) return false;
+            if (typeof h.maxPages === "number" && e.book.pages > 0 && e.book.pages > h.maxPages) return false;
+            return true;
+          });
+          const removed = before - filtered.length;
+
+          if (plan.orderedQlooIds.length) {
+            const order = new Map(plan.orderedQlooIds.map((id, i) => [id, i] as const));
+            filtered = [...filtered].sort((a, b) => (order.get(a.id) ?? 999) - (order.get(b.id) ?? 999));
+          }
+          enriched = filtered;
+
+          const bits: string[] = [];
+          if (inc.length) bits.push(`only ${h.authorsInclude!.join(", ")}`);
+          if (exc.length) bits.push(`excluding ${h.authorsExclude!.join(", ")}`);
+          if (typeof h.maxPrice === "number") bits.push(`≤ $${h.maxPrice}`);
+          if (typeof h.maxPages === "number") bits.push(`≤ ${h.maxPages} pages`);
+          yield {
+            type: "step",
+            text: bits.length
+              ? `Enforced your requirements: ${bits.join("; ")}.`
+              : "Adjusted the shortlist for your request.",
+            detail:
+              removed > 0
+                ? `removed ${removed} that didn't qualify${plan.rationale ? " · " + plan.rationale : ""}`
+                : plan.rationale || undefined,
+          };
         }
       } catch {
         yield { type: "step", text: "(Couldn't apply that via the model — using the taste ranking as-is.)" };
@@ -235,6 +272,11 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
     } else {
       yield { type: "step", text: `Noted your request: "${request}".` };
     }
+  }
+
+  if (enriched.length === 0) {
+    yield { type: "result", picks: [], note: "No in-stock books match that request — try relaxing it." };
+    return;
   }
 
   yield { type: "step", text: "Picking a close match, an overlooked gem, and a wildcard." };

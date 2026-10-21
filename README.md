@@ -9,13 +9,13 @@ taste graph. Submission for the Qloo Agentic Hackathon — *"agents, but with ta
 
 ## ⭐ The wow: the Cultural Thread
 
-ShelfSense doesn't just say *"because you like X."* It draws the **real cultural thread** — the shared Qloo tags (mood, theme, archetype) that connect a reader's movies and music to a book — and shows the attribution weight behind each pick. An LLM alone can't do this, and the built-in A/B proves it (it recommends a reader their *own* favorite author; Qloo makes the smarter leap).
+ShelfSense doesn't just say *"because you like X."* It draws the **real cultural thread** — the shared Qloo tags (mood, theme, archetype) that connect a reader's movies and music to a book — and shows the attribution weight behind each pick. This is grounded in Qloo's taste graph, not generated prose. The built-in **blind A/B** lets anyone compare Qloo-ranked picks against an LLM-only baseline for themselves and judge which set is better — run it past a few readers to see whether the taste layer earns its place.
 
 ![The Cultural Thread — shared Qloo tags linking taste to a pick](docs/cultural-thread.png)
 
 ![Three grounded picks with shelf, price, and reasons](docs/recommendations.png)
 
-![Blind A/B — the LLM-only column recommends the reader their own favorite author; Qloo makes the smarter leap](docs/ab-test.png)
+![Blind A/B — Qloo-ranked picks vs. an LLM-only baseline, columns hidden until you vote](docs/ab-test.png)
 
 ---
 

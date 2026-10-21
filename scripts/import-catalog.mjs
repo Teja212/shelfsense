@@ -72,6 +72,7 @@ const books = rows.map((r, i) => {
     price: Number(r.price) || 0,
     stock: Number(r.stock) || 0,
     shelf: r.shelf,
+    pages: Number(r.pages) || 0,
     qlooId: was?.qlooId ?? null,
     qlooName: was?.qlooName ?? null,
     needsReview: was?.needsReview ?? false,

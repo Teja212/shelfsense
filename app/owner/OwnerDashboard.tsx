@@ -13,6 +13,8 @@ export default function OwnerDashboard({ initial }: { initial: Book[] }) {
   const [busy, setBusy] = useState(false);
 
   const reviewCount = books.filter((b) => b.needsReview || !b.qlooId).length;
+  const ownerKey =
+    typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("key") || "" : "";
 
   function setLocal(id: string, patch: Partial<Book>) {
     setBooks((bs) => bs.map((b) => (b.id === id ? { ...b, ...patch } : b)));
@@ -23,7 +25,7 @@ export default function OwnerDashboard({ initial }: { initial: Book[] }) {
     try {
       const res = await fetch(`/api/inventory/${id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-owner-key": ownerKey },
         body: JSON.stringify(body),
       });
       if (res.ok) setLocal(id, await res.json());
@@ -61,7 +63,7 @@ export default function OwnerDashboard({ initial }: { initial: Book[] }) {
   async function resetDemo() {
     setBusy(true);
     try {
-      await fetch("/api/reset", { method: "POST" });
+      await fetch("/api/reset", { method: "POST", headers: { "x-owner-key": ownerKey } });
       window.location.reload();
     } finally {
       setBusy(false);

@@ -58,21 +58,46 @@ function parseJson<T>(raw: string): T | null {
   }
 }
 
-export type ConstraintCandidate = { qlooId: string; title: string; author: string; affinity: number };
+export type ConstraintCandidate = {
+  qlooId: string;
+  title: string;
+  author: string;
+  price: number;
+  pages: number;
+  affinity: number;
+};
 
-/** Reorder/demote a Qloo-ranked shortlist to honor a free-text request. */
-export async function applyConstraints(args: {
+export type ConstraintPlan = {
+  hard: {
+    authorsInclude?: string[];
+    authorsExclude?: string[];
+    excludeTitles?: string[];
+    maxPrice?: number;
+    maxPages?: number;
+  };
+  orderedQlooIds: string[];
+  rationale: string;
+};
+
+/**
+ * Turn a free-text request into (1) HARD constraints that must be satisfied and
+ * (2) a soft preference ordering, against a fixed candidate list. The caller
+ * applies the hard constraints deterministically — the model only classifies.
+ */
+export async function planConstraints(args: {
   favorites: string[];
   request: string;
   candidates: ConstraintCandidate[];
-}): Promise<{ orderedQlooIds: string[]; rationale: string } | null> {
+}): Promise<ConstraintPlan | null> {
   const system =
-    "You are a bookseller's assistant. You receive books already ranked by a reader's taste " +
-    "(higher affinity = stronger taste match) and the reader's extra request. Reorder the list so " +
-    "books that best honor the request come first (e.g. 'shorter' prefers shorter books, 'less dark' " +
-    "prefers lighter ones, 'already read X' sends X to the end). Keep taste affinity as the tie-breaker. " +
-    "Use ONLY the given books and their qlooId values; never invent titles. " +
-    'Reply as JSON: {"orderedQlooIds": string[], "rationale": string}. Rationale <= 18 words.';
+    "You convert a reader's extra request into hard constraints and a soft ordering, against a FIXED " +
+    "candidate list. HARD = must be satisfied: authorsInclude (ONLY these authors, e.g. 'only books by " +
+    "X'), authorsExclude (never these authors), excludeTitles (never these exact titles), maxPrice " +
+    "(dollars), maxPages. SOFT = mood/vibe like 'shorter', 'less dark', 'lighter' — never put these in " +
+    "hard; instead order candidates best-first for them in orderedQlooIds, using the given pages for " +
+    "'shorter'/'longer'. Use ONLY the provided qlooIds and the author/title strings exactly as given; " +
+    'never invent. Reply as JSON: {"hard": {}, "orderedQlooIds": [], "rationale": ""} — omit a hard ' +
+    "field when it does not apply, include every candidate qlooId in orderedQlooIds, rationale <= 18 words.";
   const user = JSON.stringify({
     favorites: args.favorites,
     request: args.request,
@@ -80,6 +105,8 @@ export async function applyConstraints(args: {
       qlooId: c.qlooId,
       title: c.title,
       author: c.author,
+      price: c.price,
+      pages: c.pages,
       affinity: Number(c.affinity.toFixed(3)),
     })),
   });
@@ -87,11 +114,12 @@ export async function applyConstraints(args: {
     { role: "system", content: system },
     { role: "user", content: user },
   ]);
-  const parsed = parseJson<{ orderedQlooIds: string[]; rationale: string }>(raw);
-  if (!parsed || !Array.isArray(parsed.orderedQlooIds)) return null;
+  const parsed = parseJson<ConstraintPlan>(raw);
+  if (!parsed) return null;
+  if (!parsed.hard || typeof parsed.hard !== "object") parsed.hard = {};
+  if (!Array.isArray(parsed.orderedQlooIds)) parsed.orderedQlooIds = [];
   const valid = new Set(args.candidates.map((c) => c.qlooId));
   parsed.orderedQlooIds = parsed.orderedQlooIds.filter((id) => valid.has(id));
-  if (!parsed.orderedQlooIds.length) return null;
   return parsed;
 }
 
@@ -127,12 +155,12 @@ export async function llmOnlyPicks(args: {
 }): Promise<{ title: string; why: string }[] | null> {
   const system =
     "You are a bookseller. From ONLY the provided in-stock list, choose the 3 best books for this " +
-    "reader's taste. Use only titles that appear in the list — never invent one. " +
-    'Reply as JSON: {"picks": [{"title": string, "why": string}]}. Each why <= 25 words.';
+    "reader's taste. Return each book's `title` EXACTLY as it appears in the list — never invent or " +
+    'reformat a title. Reply as JSON: {"picks": [{"title": string, "why": string}]}. Each why <= 25 words.';
   const user = JSON.stringify({
     favorites: args.favorites,
     budget: args.budget,
-    inStock: args.inventory.map((b) => `${b.title} — ${b.author}`),
+    inStock: args.inventory.map((b) => ({ title: b.title, author: b.author })),
   });
   const raw = await chat([
     { role: "system", content: system },

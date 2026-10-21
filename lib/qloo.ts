@@ -141,7 +141,8 @@ function tagKind(id: string): string | null {
   const namespace = parts[3];
   if (!facet || !namespace) return null;
   if (namespace !== "qloo" && namespace !== "media" && namespace !== "music") return null;
-  return FACET_KIND[facet] ?? "theme";
+  // Allowlist facets — drop anything else (formats, causes, brand-ish tags).
+  return FACET_KIND[facet] ?? null;
 }
 
 /** Cultural tags most associated with an entity (noise filtered out). */

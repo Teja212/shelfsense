@@ -132,13 +132,12 @@ export default function RecommendClient() {
     stream(baseBody({ exclude: next }));
   }
 
-  async function markOutOfStock(p: AgentPick) {
-    await fetch(`/api/inventory/${p.bookId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ stock: 0 }),
-    });
-    stream(baseBody({ justRemoved: p.title }));
+  // Session-local: simulates this book going out of stock for *your* session
+  // only (via exclusion) — it never mutates the shared catalog.
+  function markOutOfStock(p: AgentPick) {
+    const next = [...excludeIds, p.qlooId];
+    setExcludeIds(next);
+    stream(baseBody({ exclude: next, justRemoved: p.title }));
   }
 
   return (
@@ -235,18 +234,20 @@ export default function RecommendClient() {
                 <div className="pick-why">
                   {p.why} <span className="tag ok">via Qloo</span>
                 </div>
-                {threads[p.qlooId] && (
-                  <div className="pick-tags">
-                    {(uniqueSharedTags(threads[p.qlooId]).length > 0
-                      ? uniqueSharedTags(threads[p.qlooId]).slice(0, 4)
-                      : threads[p.qlooId].bookTags.slice(0, 4)
-                    ).map((t, i) => (
-                      <span className={"chip kind-" + t.kind} key={i}>
-                        {t.name}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                {threads[p.qlooId] &&
+                  (() => {
+                    // Only genuine shared tags on cards — no noisier book-vibe fallback.
+                    const chips = uniqueSharedTags(threads[p.qlooId]).slice(0, 4);
+                    return chips.length ? (
+                      <div className="pick-tags">
+                        {chips.map((t, i) => (
+                          <span className={"chip kind-" + t.kind} key={i}>
+                            {t.name}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null;
+                  })()}
                 <div className="pick-actions">
                   <button className="btn" onClick={() => alreadyRead(p)} disabled={running}>
                     Already read it
@@ -275,6 +276,8 @@ export default function RecommendClient() {
               if (!th) return null;
               const shared = uniqueSharedTags(th);
               const cloud = th.mode === "tags" ? shared : th.bookTags.slice(0, 8);
+              // Don't show an empty/weak thread — only render when there are real tags.
+              if (cloud.length === 0) return null;
               const maxW = Math.max(0.0001, ...th.links.map((l) => l.weight));
               return (
                 <div className="panel thread-panel">
