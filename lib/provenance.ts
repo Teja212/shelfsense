@@ -1,8 +1,9 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { redis } from "./redis";
 
 // Append-only record of every Qloo call the app/agent makes. Powers the
-// "what came from Qloo" badge and the transparency the judges look for.
+// "what came from Qloo" transparency view. Uses a Redis list in production
+// (so it persists across serverless invocations), with an in-memory fallback
+// for local dev.
 
 export type ProvenanceEntry = {
   ts: string;
@@ -13,22 +14,34 @@ export type ProvenanceEntry = {
   resultCount?: number;
 };
 
-const FILE = path.join(process.cwd(), "data", "provenance.json");
+const KEY = "shelfsense:provenance";
 const MAX = 200;
 
+let mem: ProvenanceEntry[] = [];
+
 export async function loadProvenance(): Promise<ProvenanceEntry[]> {
-  try {
-    return JSON.parse(await fs.readFile(FILE, "utf8")) as ProvenanceEntry[];
-  } catch {
-    return [];
+  const r = redis();
+  if (r) {
+    try {
+      const raw = await r.lrange<ProvenanceEntry | string>(KEY, 0, MAX - 1);
+      return (raw || []).map((x) => (typeof x === "string" ? (JSON.parse(x) as ProvenanceEntry) : x));
+    } catch {
+      return [];
+    }
   }
+  return mem;
 }
 
 export async function logQlooCall(entry: ProvenanceEntry): Promise<void> {
   try {
-    const log = await loadProvenance();
-    log.unshift(entry);
-    await fs.writeFile(FILE, JSON.stringify(log.slice(0, MAX), null, 2), "utf8");
+    const r = redis();
+    if (r) {
+      await r.lpush(KEY, entry);
+      await r.ltrim(KEY, 0, MAX - 1);
+      return;
+    }
+    mem.unshift(entry);
+    mem = mem.slice(0, MAX);
   } catch {
     // Logging must never break a request.
   }

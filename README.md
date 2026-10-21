@@ -5,7 +5,16 @@
 A taste-grounded, agentic bookseller for independent bookstores, built on [Qloo](https://qloo.com)'s
 taste graph. Submission for the Qloo Agentic Hackathon — *"agents, but with taste."*
 
-**Live demo:** _<add your deployed URL here>_
+**Live demo:** https://shelfsense-teja-aaa4.vercel.app
+
+## ⭐ The wow: the Cultural Thread
+
+ShelfSense doesn't just say *"because you like X."* It draws the **real cultural thread** — the shared Qloo tags (mood, theme, archetype) that connect a reader's movies and music to a book — and shows the attribution weight behind each pick. An LLM alone can't do this, and the built-in A/B proves it (it recommends a reader their *own* favorite author; Qloo makes the smarter leap).
+
+<!-- Add screenshots to docs/ with these exact names and they'll render here. -->
+![The Cultural Thread — shared Qloo tags linking taste to a pick](docs/cultural-thread.png)
+![Three grounded picks with shelf, price, and reasons](docs/recommendations.png)
+![Blind A/B: Qloo vs. LLM-only](docs/ab-test.png)
 
 ---
 
@@ -76,7 +85,7 @@ Locally, leave the Upstash vars unset — the store falls back to in-memory.
 3. Add four environment variables: `QLOO_API_KEY`, `DEEPSEEK_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`.
 4. Deploy → public `*.vercel.app` URL.
 
-Redis is what lets owner edits and the out-of-stock re-plan persist across Vercel's serverless invocations; the agent routes set `maxDuration = 60` so the Qloo + LLM calls don't time out. Any single-instance Node host (Render, Railway, Fly.io) also works and doesn't need Redis — the in-memory store persists there on its own.
+Redis is what lets owner edits, the out-of-stock re-plan, the A/B tally, and the Qloo call log persist across Vercel's serverless invocations; the agent routes set `maxDuration = 60` so the Qloo + LLM calls don't time out. Any single-instance Node host (Render, Railway, Fly.io) also works and doesn't need Redis — the in-memory store persists there on its own.
 
 ## Scripts
 
