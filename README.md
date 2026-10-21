@@ -11,10 +11,11 @@ taste graph. Submission for the Qloo Agentic Hackathon — *"agents, but with ta
 
 ShelfSense doesn't just say *"because you like X."* It draws the **real cultural thread** — the shared Qloo tags (mood, theme, archetype) that connect a reader's movies and music to a book — and shows the attribution weight behind each pick. An LLM alone can't do this, and the built-in A/B proves it (it recommends a reader their *own* favorite author; Qloo makes the smarter leap).
 
-<!-- Add screenshots to docs/ with these exact names and they'll render here. -->
+<!-- Screenshots: save these files into docs/ then remove this comment's wrapper to display them.
 ![The Cultural Thread — shared Qloo tags linking taste to a pick](docs/cultural-thread.png)
 ![Three grounded picks with shelf, price, and reasons](docs/recommendations.png)
 ![Blind A/B: Qloo vs. LLM-only](docs/ab-test.png)
+-->
 
 ---
 
