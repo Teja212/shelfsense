@@ -1,0 +1,1168 @@
+[
+  {
+    "id": "1",
+    "title": "Project Hail Mary",
+    "author": "Andy Weir",
+    "isbn": "9780593135204",
+    "price": 18.99,
+    "stock": 0,
+    "shelf": "A1",
+    "qlooId": "7B75291D-103B-476A-91B5-81E7687D6A59",
+    "qlooName": "Project Hail Mary",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "7B75291D-103B-476A-91B5-81E7687D6A59",
+        "name": "Project Hail Mary"
+      },
+      {
+        "id": "0EBBE7C6-16F2-47DD-A1AB-7E9E9B44C23F",
+        "name": "Hail Mary: The Rise and Fall of the National Women's Football League"
+      },
+      {
+        "id": "8B456963-A034-47D2-BB1F-27DCF34AE0EF",
+        "name": "The Rosie Project (Don Tillman, #1)"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "The Martian",
+    "author": "Andy Weir",
+    "isbn": "9780553418026",
+    "price": 15.99,
+    "stock": 4,
+    "shelf": "A1",
+    "qlooId": "69AF3126-E4C2-47ED-8E6E-A5BD6DD073EB",
+    "qlooName": "The Martian",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "69AF3126-E4C2-47ED-8E6E-A5BD6DD073EB",
+        "name": "The Martian"
+      },
+      {
+        "id": "CB4D34AD-C7D1-46F0-B2C9-D37C3C45F0B6",
+        "name": "The Martian Chronicles"
+      },
+      {
+        "id": "81252EC8-0A21-48F3-8532-7DD08F8CD52C",
+        "name": "The Martians (Mars Trilogy, #3.5)"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Klara and the Sun",
+    "author": "Kazuo Ishiguro",
+    "isbn": "9780593318171",
+    "price": 16.99,
+    "stock": 3,
+    "shelf": "B2",
+    "qlooId": "504A59EF-54E1-4911-8015-8FA64FC6AA8C",
+    "qlooName": "Klara and the Sun",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "504A59EF-54E1-4911-8015-8FA64FC6AA8C",
+        "name": "Klara and the Sun"
+      },
+      {
+        "id": "52595527-5EEC-42A8-9FFE-20D0FDDE7F02",
+        "name": "Klara and the Sun / Never Let Me Go"
+      },
+      {
+        "id": "D8C1BEFD-4B08-432E-B103-29ECECE2F024",
+        "name": "I'll Give You the Sun"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Never Let Me Go",
+    "author": "Kazuo Ishiguro",
+    "isbn": "9781400078776",
+    "price": 15,
+    "stock": 2,
+    "shelf": "B2",
+    "qlooId": "3ADBB2A8-6788-4CD9-93C4-417CAF2C789B",
+    "qlooName": "Never Let Me Go",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "3ADBB2A8-6788-4CD9-93C4-417CAF2C789B",
+        "name": "Never Let Me Go"
+      },
+      {
+        "id": "507B5AC4-4328-4379-B154-A2F0B6258782",
+        "name": "Never Let Me Go..."
+      },
+      {
+        "id": "C305C499-53C3-430A-A067-6411765B950C",
+        "name": "Never Let Me Go"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "title": "The Three-Body Problem",
+    "author": "Liu Cixin",
+    "isbn": "9780765382030",
+    "price": 17.99,
+    "stock": 5,
+    "shelf": "A2",
+    "qlooId": "C83D215D-A38A-44D1-BD15-34D282C220AC",
+    "qlooName": "The Three-Body Problem (Remembrance of Earth’s Past, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "C83D215D-A38A-44D1-BD15-34D282C220AC",
+        "name": "The Three-Body Problem (Remembrance of Earth’s Past, #1)"
+      },
+      {
+        "id": "EEA00C8E-6838-496A-BBB0-0EE158149C82",
+        "name": "The Three Body Problem (Cambridge Mysteries, #1)"
+      },
+      {
+        "id": "1CBA5736-4A4F-4ADB-8A68-02958A561713",
+        "name": "The Mind-Body Problem"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "title": "The Dark Forest",
+    "author": "Liu Cixin",
+    "isbn": "9780765386694",
+    "price": 17.99,
+    "stock": 2,
+    "shelf": "A2",
+    "qlooId": "F8495D78-9B3E-4A4E-A614-6855E37F1380",
+    "qlooName": "The Dark Forest (Remembrance of Earth’s Past, #2)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "F8495D78-9B3E-4A4E-A614-6855E37F1380",
+        "name": "The Dark Forest (Remembrance of Earth’s Past, #2)"
+      },
+      {
+        "id": "7909B3C2-C63F-4724-8CF6-B5267C2E8DBC",
+        "name": "The Dark Forest"
+      },
+      {
+        "id": "89C11CA7-B42A-49CD-8546-771035672919",
+        "name": "The Dark Forest (Remembrance of Earth’s Past, #2)"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "title": "Station Eleven",
+    "author": "Emily St. John Mandel",
+    "isbn": "9780804172448",
+    "price": 16,
+    "stock": 3,
+    "shelf": "B1",
+    "qlooId": "23E536B4-9185-4C01-AE22-2D65A8C9CECC",
+    "qlooName": "Station Eleven",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "23E536B4-9185-4C01-AE22-2D65A8C9CECC",
+        "name": "Station Eleven"
+      },
+      {
+        "id": "01128F8A-A751-4078-8DA2-E24C68D60AF3",
+        "name": "Station Eleven"
+      },
+      {
+        "id": "5FF52E9A-7338-4562-A9A5-F840E695D623",
+        "name": "Station Eleven: Das Licht der letzten Tage | Das Buch zur Serie || Prophetisch, düster und voller Hoffnung (German Edition)"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "title": "Sea of Tranquility",
+    "author": "Emily St. John Mandel",
+    "isbn": "9780593321447",
+    "price": 18,
+    "stock": 2,
+    "shelf": "B1",
+    "qlooId": "31D394F7-332A-4C5F-95D7-47CF5C1758A0",
+    "qlooName": "Sea of Tranquility",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "31D394F7-332A-4C5F-95D7-47CF5C1758A0",
+        "name": "Sea of Tranquility"
+      },
+      {
+        "id": "BBD5F426-6A65-4110-A38A-FC03CA08DF87",
+        "name": "Sea of Tranquility"
+      },
+      {
+        "id": "CB722FB9-DC81-4C01-AE7C-B007DBD8565A",
+        "name": "The Sea of Tranquility"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "title": "Piranesi",
+    "author": "Susanna Clarke",
+    "isbn": "9781635575637",
+    "price": 16.95,
+    "stock": 4,
+    "shelf": "C1",
+    "qlooId": "55908017-4CFD-4688-9A7E-7B1FF04B171D",
+    "qlooName": "Piranesi",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "55908017-4CFD-4688-9A7E-7B1FF04B171D",
+        "name": "Piranesi"
+      },
+      {
+        "id": "BADF453B-7F5A-44F6-8BB5-CC62337330AE",
+        "name": "Giovanni Battista Piranesi: Drawings in the Pierpont Morgan Library"
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Jonathan Strange and Mr Norrell",
+    "author": "Susanna Clarke",
+    "isbn": "9780765356154",
+    "price": 21.99,
+    "stock": 1,
+    "shelf": "C1",
+    "qlooId": "3C070898-E419-471B-812F-73C773FB2D40",
+    "qlooName": "Jonathan Strange & Mr Norrell",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "3C070898-E419-471B-812F-73C773FB2D40",
+        "name": "Jonathan Strange & Mr Norrell"
+      },
+      {
+        "id": "0BA1375D-BC3E-4C80-9BC0-444A3F858128",
+        "name": "The Strange Case of Dr. Jekyll and Mr. Hyde and Other Tales of Terror"
+      },
+      {
+        "id": "F733333A-4312-4B20-92C7-A765540A67F2",
+        "name": "Strange Case of Dr Jekyll and Mr Hyde and Other Tales"
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "title": "The Secret History",
+    "author": "Donna Tartt",
+    "isbn": "9781400031702",
+    "price": 19,
+    "stock": 3,
+    "shelf": "B3",
+    "qlooId": "4862C8C1-0412-4042-BF3E-D56DEAFEF854",
+    "qlooName": "The Secret History",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "4862C8C1-0412-4042-BF3E-D56DEAFEF854",
+        "name": "The Secret History"
+      },
+      {
+        "id": "21C70231-B1F2-4F21-A35A-8CB5E97F6156",
+        "name": "The Secret History"
+      },
+      {
+        "id": "6C54CF5F-19C1-4868-9C87-39092F1F4C5B",
+        "name": "The Secret History of the American Empire: Economic Hit Men, Jackals &amp; the Truth about Global Corruption"
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "title": "The Goldfinch",
+    "author": "Donna Tartt",
+    "isbn": "9780316055444",
+    "price": 22,
+    "stock": 2,
+    "shelf": "B3",
+    "qlooId": "B39FD779-0D29-4EE0-94B2-8E7FE2418657",
+    "qlooName": "The Goldfinch",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "B39FD779-0D29-4EE0-94B2-8E7FE2418657",
+        "name": "The Goldfinch"
+      },
+      {
+        "id": "10ADD19D-CBB2-4042-AE46-AA56AAFD6EBD",
+        "name": "The Goldfinch: By Donna Tartt -- Analysis"
+      },
+      {
+        "id": "59122588-5DBF-4AFB-A23F-9E93B7D7179F",
+        "name": "The Goldfinch: A Guide for Book Clubs (Study Guides for Book Clubs)"
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "title": "Gone Girl",
+    "author": "Gillian Flynn",
+    "isbn": "9780307588371",
+    "price": 16.99,
+    "stock": 5,
+    "shelf": "D1",
+    "qlooId": "4DA76081-4757-4D70-8586-4BE0B506BDB7",
+    "qlooName": "Gone Girl",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "4DA76081-4757-4D70-8586-4BE0B506BDB7",
+        "name": "Gone Girl"
+      },
+      {
+        "id": "585AF84E-84A5-4EE0-8AFD-4EC84866E0A9",
+        "name": "Last Girl Gone (Laura Chambers Mystery, #1)"
+      },
+      {
+        "id": "30805CB7-8238-4B52-B82E-87752F9C1F31",
+        "name": "Girl Gone Missing (Cash Blackbear Mysteries, #2)"
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "title": "Sharp Objects",
+    "author": "Gillian Flynn",
+    "isbn": "9780307341556",
+    "price": 16,
+    "stock": 3,
+    "shelf": "D1",
+    "qlooId": "403150C9-F970-415A-86CE-5D364B13810E",
+    "qlooName": "Sharp Objects",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "403150C9-F970-415A-86CE-5D364B13810E",
+        "name": "Sharp Objects"
+      },
+      {
+        "id": "2492FAA5-A8F9-4673-81A4-3DA9C35AA72D",
+        "name": "The Novels of Gillian Flynn: Sharp Objects, Dark Places"
+      },
+      {
+        "id": "0BD24C15-F605-4A48-A1A2-5B1CC2704938",
+        "name": "Sharp Objects"
+      }
+    ]
+  },
+  {
+    "id": "15",
+    "title": "The Silent Patient",
+    "author": "Alex Michaelides",
+    "isbn": "9781250301697",
+    "price": 16.99,
+    "stock": 6,
+    "shelf": "D1",
+    "qlooId": "16EE9651-72DC-4AA9-A018-E2032607720C",
+    "qlooName": "The Silent Patient",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "16EE9651-72DC-4AA9-A018-E2032607720C",
+        "name": "The Silent Patient"
+      },
+      {
+        "id": "6561C3BC-F2C4-4E4D-AABB-A57962D84D3D",
+        "name": "The Silent Patient"
+      },
+      {
+        "id": "F8B6DCB4-427E-4FF1-BF8B-3C080B373979",
+        "name": "The Silent Patient: A True Story"
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "title": "In the Woods",
+    "author": "Tana French",
+    "isbn": "9780143113492",
+    "price": 17,
+    "stock": 2,
+    "shelf": "D2",
+    "qlooId": "4A7E5D13-F1EA-416F-A2B6-BEE0D7200C2C",
+    "qlooName": "In the Woods (Dublin Murder Squad, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "4A7E5D13-F1EA-416F-A2B6-BEE0D7200C2C",
+        "name": "In the Woods (Dublin Murder Squad, #1)"
+      },
+      {
+        "id": "F4D9D394-654A-4F8D-8330-99236B53ACC0",
+        "name": "In the Woods (Orca Soundings)"
+      },
+      {
+        "id": "3F3E417D-F580-4A3E-AA83-7E782A237274",
+        "name": "In the Woods"
+      }
+    ]
+  },
+  {
+    "id": "17",
+    "title": "The Likeness",
+    "author": "Tana French",
+    "isbn": "9780143115625",
+    "price": 17,
+    "stock": 0,
+    "shelf": "D2",
+    "qlooId": "FA754203-55E1-4811-8DD1-E87E7F665A0E",
+    "qlooName": "The Likeness (Dublin Murder Squad, #2)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "FA754203-55E1-4811-8DD1-E87E7F665A0E",
+        "name": "The Likeness (Dublin Murder Squad, #2)"
+      },
+      {
+        "id": "A7529835-8BC1-4274-A768-EE8D55229DF2",
+        "name": "The Likeness (Dublin Murder Squad, #2)"
+      },
+      {
+        "id": "A2A9F351-CCB3-4E07-B7D3-B189BF3CE595",
+        "name": "A Royal Likeness"
+      }
+    ]
+  },
+  {
+    "id": "18",
+    "title": "Normal People",
+    "author": "Sally Rooney",
+    "isbn": "9781984822185",
+    "price": 17,
+    "stock": 4,
+    "shelf": "B4",
+    "qlooId": "28D688C4-0760-4042-BEC1-F6EE75E71CC7",
+    "qlooName": "Normal People",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "28D688C4-0760-4042-BEC1-F6EE75E71CC7",
+        "name": "Normal People"
+      },
+      {
+        "id": "F1591EFD-54CA-40A6-AA45-0E1E5EE47181",
+        "name": "Normal People: The Scripts"
+      },
+      {
+        "id": "03440629-8CEA-4CEC-9246-764BE19758EB",
+        "name": "Normal People Don't Live Like This"
+      }
+    ]
+  },
+  {
+    "id": "19",
+    "title": "Conversations with Friends",
+    "author": "Sally Rooney",
+    "isbn": "9780451499066",
+    "price": 17,
+    "stock": 2,
+    "shelf": "B4",
+    "qlooId": "A193D8AC-FC7C-4382-9AFE-6638B637DCEB",
+    "qlooName": "Conversations with Friends",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "A193D8AC-FC7C-4382-9AFE-6638B637DCEB",
+        "name": "Conversations with Friends"
+      },
+      {
+        "id": "FC4FB686-90FD-417F-AFB6-839E8E83A213",
+        "name": "Conversations with Friends"
+      },
+      {
+        "id": "DD0EEFED-8DB6-4478-9A9A-0AB368089CF3",
+        "name": "Conversations with Friends: The Scripts"
+      }
+    ]
+  },
+  {
+    "id": "20",
+    "title": "A Little Life",
+    "author": "Hanya Yanagihara",
+    "isbn": "9780804172707",
+    "price": 19,
+    "stock": 2,
+    "shelf": "B4",
+    "qlooId": "87D361D0-275F-49F4-9AD6-B4C953580D12",
+    "qlooName": "A Little Life",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "87D361D0-275F-49F4-9AD6-B4C953580D12",
+        "name": "A Little Life"
+      },
+      {
+        "id": "A59748F8-17F2-4816-810F-10DE9432D74D",
+        "name": "Ikigai: The Japanese Secret to a Long and Happy Life / The Little Book of Lykke / Lagom: The Swedish Art of Balanced Living"
+      },
+      {
+        "id": "ADA0614B-AC9D-43AF-BAE2-B24D0F58105C",
+        "name": "A Big Little Life:  A Memoir of a Joyful Dog"
+      }
+    ]
+  },
+  {
+    "id": "21",
+    "title": "Cloud Atlas",
+    "author": "David Mitchell",
+    "isbn": "9780375507250",
+    "price": 18,
+    "stock": 3,
+    "shelf": "A3",
+    "qlooId": "66E6FF5B-3DCB-4561-8A28-4FAFE10EFFE0",
+    "qlooName": "Cloud Atlas",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "66E6FF5B-3DCB-4561-8A28-4FAFE10EFFE0",
+        "name": "Cloud Atlas"
+      },
+      {
+        "id": "90AA3582-947C-4221-A5FC-621C75BF86CA",
+        "name": "The Cloud Atlas"
+      },
+      {
+        "id": "6D5C0C13-46B1-4ED5-A303-8232343454C6",
+        "name": "Cloud Atlas Vol. 1 of 2 (Korean Edition)"
+      }
+    ]
+  },
+  {
+    "id": "22",
+    "title": "The Overstory",
+    "author": "Richard Powers",
+    "isbn": "9780393356687",
+    "price": 18.95,
+    "stock": 2,
+    "shelf": "B1",
+    "qlooId": "EDB4C827-B1F4-4601-9C14-44D0D584A59A",
+    "qlooName": "The Overstory",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "EDB4C827-B1F4-4601-9C14-44D0D584A59A",
+        "name": "The Overstory"
+      },
+      {
+        "id": "8ED37ED0-F244-45E7-8E03-0683949E09B5",
+        "name": "The Overstory Book: Cultivating Connections with Trees, 2nd Edition"
+      },
+      {
+        "id": "5F57C600-60BB-4901-9BC6-EE6FC2B9DC12",
+        "name": "Overstory: Zero : Real Life in Timber Country"
+      }
+    ]
+  },
+  {
+    "id": "23",
+    "title": "Exhalation",
+    "author": "Ted Chiang",
+    "isbn": "9781101947883",
+    "price": 17,
+    "stock": 3,
+    "shelf": "A2",
+    "qlooId": "8378A4A3-AC5B-4CDC-B6BC-3C25BAE0AC41",
+    "qlooName": "Exhalation",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "8378A4A3-AC5B-4CDC-B6BC-3C25BAE0AC41",
+        "name": "Exhalation"
+      },
+      {
+        "id": "7DA4764B-701A-4CFD-A298-81ECF57CBF6C",
+        "name": "Exhalation"
+      },
+      {
+        "id": "270AAD9A-C7A8-48B8-94D2-94FE0AA94543",
+        "name": "Breathmoss and Other Exhalations"
+      }
+    ]
+  },
+  {
+    "id": "24",
+    "title": "Stories of Your Life and Others",
+    "author": "Ted Chiang",
+    "isbn": "9781101972120",
+    "price": 17,
+    "stock": 2,
+    "shelf": "A2",
+    "qlooId": "0C38FDE6-C94A-4443-B70E-35DE451E6805",
+    "qlooName": "Stories of Your Life and Others",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "0C38FDE6-C94A-4443-B70E-35DE451E6805",
+        "name": "Stories of Your Life and Others"
+      },
+      {
+        "id": "03ECCE77-6D66-484F-BD9C-D954E03BD75F",
+        "name": "The Horla and Others: Guy de Maupassant's Best Weird Fiction and Ghost Stories: Tales of Mystery, Murder, Fantasy & Horror (Oldstyle Tales' Horror Authors)"
+      },
+      {
+        "id": "84DA28C2-65FC-4FF5-BC01-3136183F8CB2",
+        "name": "Boundaries: When to Say Yes, How to Say No to Take Control of Your Life"
+      }
+    ]
+  },
+  {
+    "id": "25",
+    "title": "The City We Became",
+    "author": "N. K. Jemisin",
+    "isbn": "9780316509848",
+    "price": 18.99,
+    "stock": 2,
+    "shelf": "C2",
+    "qlooId": "4D503B12-805D-4300-9535-B11B03ED2E5A",
+    "qlooName": "The City We Became (Great Cities, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "4D503B12-805D-4300-9535-B11B03ED2E5A",
+        "name": "The City We Became (Great Cities, #1)"
+      },
+      {
+        "id": "CCF5E01E-6900-4C35-842E-DA4D60289CF1",
+        "name": "We Own This City: A True Story of Crime, Cops and Corruption in an American City"
+      },
+      {
+        "id": "17E59DA6-AE42-461B-A184-4215870F0F29",
+        "name": "And Still We Rise:: The Trials and Triumphs of Twelve Gifted Inner-City Students"
+      }
+    ]
+  },
+  {
+    "id": "26",
+    "title": "The Fifth Season",
+    "author": "N. K. Jemisin",
+    "isbn": "9780316229296",
+    "price": 17.99,
+    "stock": 4,
+    "shelf": "C2",
+    "qlooId": "9E0900EA-1865-408F-B700-FED7E3F916B4",
+    "qlooName": "The Fifth Season (The Broken Earth, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "9E0900EA-1865-408F-B700-FED7E3F916B4",
+        "name": "The Fifth Season (The Broken Earth, #1)"
+      },
+      {
+        "id": "196762DA-28FD-4E61-8F30-CF83E1C02676",
+        "name": "The Fifth Season (The Broken Earth, #1)"
+      },
+      {
+        "id": "F6AAE4AC-6249-451F-9AE7-36C538BB5189",
+        "name": "The fifth season (Malin Fors, #5)"
+      }
+    ]
+  },
+  {
+    "id": "27",
+    "title": "Mexican Gothic",
+    "author": "Silvia Moreno-Garcia",
+    "isbn": "9780525620785",
+    "price": 17,
+    "stock": 3,
+    "shelf": "C3",
+    "qlooId": "3CA66B76-3465-47B4-AD98-FFD3FADE116F",
+    "qlooName": "Mexican Gothic",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "3CA66B76-3465-47B4-AD98-FFD3FADE116F",
+        "name": "Mexican Gothic"
+      },
+      {
+        "id": "81105285-FE6B-4C99-BF8B-4723E46F62FF",
+        "name": "I Am Not Your Perfect Mexican Daughter"
+      },
+      {
+        "id": "1515B842-8C81-4135-9863-DA3D312CD852",
+        "name": "Three Gothic Novels: The Castle of Otranto, Vathek, The Vampyre, and a Fragment of a Novel"
+      }
+    ]
+  },
+  {
+    "id": "28",
+    "title": "The Seven Husbands of Evelyn Hugo",
+    "author": "Taylor Jenkins Reid",
+    "isbn": "9781501161933",
+    "price": 17,
+    "stock": 6,
+    "shelf": "B5",
+    "qlooId": "C471E196-F06E-4C78-B723-6DBAE7A003B3",
+    "qlooName": "The Seven Husbands of Evelyn Hugo",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "C471E196-F06E-4C78-B723-6DBAE7A003B3",
+        "name": "The Seven Husbands of Evelyn Hugo"
+      },
+      {
+        "id": "E79B2965-4994-4D87-A80C-4C907A98F84F",
+        "name": "The Seven Husbands of Evelyn Hugo"
+      },
+      {
+        "id": "A2F90D3E-AA0A-426F-A10A-C5210150E667",
+        "name": "The 7 1/2 Deaths of Evelyn Hardcastle"
+      }
+    ]
+  },
+  {
+    "id": "29",
+    "title": "Tomorrow and Tomorrow and Tomorrow",
+    "author": "Gabrielle Zevin",
+    "isbn": "9780593321201",
+    "price": 18.99,
+    "stock": 4,
+    "shelf": "B5",
+    "qlooId": "3B2B395B-19E7-4C6C-9C6F-BC6E86CD99CA",
+    "qlooName": "Tomorrow, and Tomorrow, and Tomorrow",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "3B2B395B-19E7-4C6C-9C6F-BC6E86CD99CA",
+        "name": "Tomorrow, and Tomorrow, and Tomorrow"
+      },
+      {
+        "id": "F8515663-9FD6-4B01-8733-9ED27503DEDB",
+        "name": "Today Tonight Tomorrow (Rowan &amp; Neil, #1)"
+      },
+      {
+        "id": "B6ADD630-A0F9-45E7-B5C3-A867379E2627",
+        "name": "Homo Deus: A History of Tomorrow"
+      }
+    ]
+  },
+  {
+    "id": "30",
+    "title": "Annihilation",
+    "author": "Jeff VanderMeer",
+    "isbn": "9780374104092",
+    "price": 15,
+    "stock": 3,
+    "shelf": "C4",
+    "qlooId": "A3CD8670-269A-4790-AABA-5C0582678F48",
+    "qlooName": "Annihilation (Southern Reach, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "A3CD8670-269A-4790-AABA-5C0582678F48",
+        "name": "Annihilation (Southern Reach, #1)"
+      },
+      {
+        "id": "88AE486A-238F-4FF5-96A7-18E42F6AD5A6",
+        "name": "Annihilation (Forgotten Realms: War of the Spider Queen, #5)"
+      },
+      {
+        "id": "B30185E8-68B9-4AFB-9612-036BE50D6DEE",
+        "name": "Annihilation (Star Wars: The Old Republic, #4)"
+      }
+    ]
+  },
+  {
+    "id": "31",
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "isbn": "9780441172719",
+    "price": 18,
+    "stock": 5,
+    "shelf": "A4",
+    "qlooId": "9BA85467-2189-46DC-BB98-4B25EE182A9D",
+    "qlooName": "Dune (Dune, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "9BA85467-2189-46DC-BB98-4B25EE182A9D",
+        "name": "Dune (Dune, #1)"
+      },
+      {
+        "id": "4C8CC32D-2453-41E2-BEC2-B216D03BB280",
+        "name": "Dune Messiah (Dune #2)"
+      },
+      {
+        "id": "571CCD85-4660-4FCA-A316-F62F9E969925",
+        "name": "Everything, Everything"
+      }
+    ]
+  },
+  {
+    "id": "32",
+    "title": "1984",
+    "author": "George Orwell",
+    "isbn": "9780451524935",
+    "price": 12.99,
+    "stock": 7,
+    "shelf": "E1",
+    "qlooId": "B776A6C0-4BD5-4773-A5FC-266FF59932FB",
+    "qlooName": "1984",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "B776A6C0-4BD5-4773-A5FC-266FF59932FB",
+        "name": "1984"
+      },
+      {
+        "id": "19019E01-3A17-4683-9547-528A944DF6F1",
+        "name": "1984"
+      },
+      {
+        "id": "B5243069-C07C-4DA8-B6BF-625DCD960942",
+        "name": "1984 (Play)"
+      }
+    ]
+  },
+  {
+    "id": "33",
+    "title": "Brave New World",
+    "author": "Aldous Huxley",
+    "isbn": "9780060850524",
+    "price": 15.99,
+    "stock": 4,
+    "shelf": "E1",
+    "qlooId": "F038CFAC-7515-4840-9F22-E45479E56439",
+    "qlooName": "Brave New World",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "F038CFAC-7515-4840-9F22-E45479E56439",
+        "name": "Brave New World"
+      },
+      {
+        "id": "5ED515D6-9A1C-4DCE-B020-4D1F23EFFFB8",
+        "name": "Brave New World and Brave New World Revisited"
+      },
+      {
+        "id": "7217D06C-3AF4-4B42-9218-14C9EFBEE06B",
+        "name": "Brave New World Revisited"
+      }
+    ]
+  },
+  {
+    "id": "34",
+    "title": "The Road",
+    "author": "Cormac McCarthy",
+    "isbn": "9780307387899",
+    "price": 16,
+    "stock": 3,
+    "shelf": "E2",
+    "qlooId": "B248BC9F-15C3-424F-AC89-DDBC1D94915A",
+    "qlooName": "The Road",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "B248BC9F-15C3-424F-AC89-DDBC1D94915A",
+        "name": "The Road"
+      },
+      {
+        "id": "6B6B1B02-D78C-4AB5-8D5E-AF67981281E9",
+        "name": "The Road"
+      },
+      {
+        "id": "1559D965-D8EB-4EAF-8644-B7CD190233C1",
+        "name": "The Road to the Dark Tower: Exploring Stephen King's Magnum Opus"
+      }
+    ]
+  },
+  {
+    "id": "35",
+    "title": "Blood Meridian",
+    "author": "Cormac McCarthy",
+    "isbn": "9780679728757",
+    "price": 17,
+    "stock": 1,
+    "shelf": "E2",
+    "qlooId": "2399992F-EEA9-4986-AFD3-87B4E4BD863C",
+    "qlooName": "Blood Meridian, or, the Evening Redness in the West",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "2399992F-EEA9-4986-AFD3-87B4E4BD863C",
+        "name": "Blood Meridian, or, the Evening Redness in the West"
+      },
+      {
+        "id": "94503DAF-8CE5-488D-AAE4-B40E22F1B995",
+        "name": "Notes on Blood Meridian"
+      },
+      {
+        "id": "BD4489ED-7F61-4AFC-8B7F-13EFBBA2DC04",
+        "name": "House of Earth and Blood (Crescent City, #1)"
+      }
+    ]
+  },
+  {
+    "id": "36",
+    "title": "Circe",
+    "author": "Madeline Miller",
+    "isbn": "9780316556347",
+    "price": 17.99,
+    "stock": 5,
+    "shelf": "C5",
+    "qlooId": "F077F4FE-A019-47C8-84BE-1313B9377DFB",
+    "qlooName": "Circe",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "F077F4FE-A019-47C8-84BE-1313B9377DFB",
+        "name": "Circe"
+      },
+      {
+        "id": "78AB3971-BC53-4429-A9ED-C369F7BCFFEA",
+        "name": "Circe / The Song of Achilles"
+      },
+      {
+        "id": "5368AEFD-0D6B-4697-9CC8-6FB0E05D1F13",
+        "name": "Circe and the Cyclops"
+      }
+    ]
+  },
+  {
+    "id": "37",
+    "title": "The Song of Achilles",
+    "author": "Madeline Miller",
+    "isbn": "9780062060624",
+    "price": 16.99,
+    "stock": 4,
+    "shelf": "C5",
+    "qlooId": "FA07222D-7A5D-45BA-925E-A868795D1EB9",
+    "qlooName": "The Song of Achilles",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "FA07222D-7A5D-45BA-925E-A868795D1EB9",
+        "name": "The Song of Achilles"
+      },
+      {
+        "id": "03036FA1-63BA-4904-B128-22709C723783",
+        "name": "The Song of Achilles"
+      },
+      {
+        "id": "78AB3971-BC53-4429-A9ED-C369F7BCFFEA",
+        "name": "Circe / The Song of Achilles"
+      }
+    ]
+  },
+  {
+    "id": "38",
+    "title": "Beloved",
+    "author": "Toni Morrison",
+    "isbn": "9781400033416",
+    "price": 16,
+    "stock": 2,
+    "shelf": "E3",
+    "qlooId": "8B7B61C3-BF4D-4B18-A443-13DB229DC913",
+    "qlooName": "Beloved (Beloved Trilogy, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "8B7B61C3-BF4D-4B18-A443-13DB229DC913",
+        "name": "Beloved (Beloved Trilogy, #1)"
+      },
+      {
+        "id": "5BA4665D-0129-4A54-99D1-FB72B53F4039",
+        "name": "Beloved"
+      },
+      {
+        "id": "252F8214-51AD-47B3-BBA0-C75FABBAF51B",
+        "name": "Beloved Hope (Heart of the Frontier, #2)"
+      }
+    ]
+  },
+  {
+    "id": "39",
+    "title": "The Night Circus",
+    "author": "Erin Morgenstern",
+    "isbn": "9780385534635",
+    "price": 17,
+    "stock": 3,
+    "shelf": "C3",
+    "qlooId": "EDB57DBC-E038-48F5-88F5-EA0F5A7E4280",
+    "qlooName": "The Night Circus",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "EDB57DBC-E038-48F5-88F5-EA0F5A7E4280",
+        "name": "The Night Circus"
+      },
+      {
+        "id": "22855159-10EF-4531-B7CC-A4F48B0F5D84",
+        "name": "The Curious Incident of the Dog in the Night-Time"
+      },
+      {
+        "id": "48A5F03B-BA5E-4851-88BD-782643336EDC",
+        "name": "The Curious Incident of the Dog in the Night-Time: The Play (Modern Plays)"
+      }
+    ]
+  },
+  {
+    "id": "40",
+    "title": "The Name of the Wind",
+    "author": "Patrick Rothfuss",
+    "isbn": "9780756404741",
+    "price": 18,
+    "stock": 4,
+    "shelf": "C6",
+    "qlooId": "50CC7BEF-F150-4DEC-B2AE-150244C475DC",
+    "qlooName": "The Name of the Wind (The Kingkiller Chronicle, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "50CC7BEF-F150-4DEC-B2AE-150244C475DC",
+        "name": "The Name of the Wind (The Kingkiller Chronicle, #1)"
+      },
+      {
+        "id": "9DB8750D-DD28-4864-BB35-84FC7CB972DB",
+        "name": "The Name of the Wind / The Wise Man's Fear / The Slow Regard of Silent Things (The Kingkiller Chronicle #1-2.5)"
+      },
+      {
+        "id": "EA4FEF02-28F1-4C4D-8916-D191A5CD0DD8",
+        "name": "The Shadow of the Wind (The Cemetery of Forgotten Books, #1)"
+      }
+    ]
+  },
+  {
+    "id": "41",
+    "title": "Neuromancer",
+    "author": "William Gibson",
+    "isbn": "9780441569595",
+    "price": 16,
+    "stock": 2,
+    "shelf": "A5",
+    "qlooId": "623B2A4E-1E6C-4D06-A3B1-931F0C022193",
+    "qlooName": "Neuromancer (Sprawl, #1)",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "623B2A4E-1E6C-4D06-A3B1-931F0C022193",
+        "name": "Neuromancer (Sprawl, #1)"
+      },
+      {
+        "id": "89AAD378-F3F8-4012-8E6A-4D32B17C16C8",
+        "name": "Neuromancer"
+      },
+      {
+        "id": "8E8DCAA9-0AD7-49BC-AE51-A7E8378A68F0",
+        "name": "William Gibson's Neuromancer: The Graphic Novel"
+      }
+    ]
+  },
+  {
+    "id": "42",
+    "title": "Snow Crash",
+    "author": "Neal Stephenson",
+    "isbn": "9780553380958",
+    "price": 18,
+    "stock": 2,
+    "shelf": "A5",
+    "qlooId": "439D7BFD-8F08-4248-AEDA-D816DD865C71",
+    "qlooName": "Snow Crash",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "439D7BFD-8F08-4248-AEDA-D816DD865C71",
+        "name": "Snow Crash"
+      },
+      {
+        "id": "F161B769-4B0D-4F5E-838E-D4A7A06363A5",
+        "name": "Carry On (Simon Snow, #1)"
+      },
+      {
+        "id": "D55C3F34-7FEF-4195-B7A5-5E76EF3C8CBB",
+        "name": "Wayward Son (Simon Snow, #2)"
+      }
+    ]
+  },
+  {
+    "id": "43",
+    "title": "Educated",
+    "author": "Tara Westover",
+    "isbn": "9780399590504",
+    "price": 18,
+    "stock": 5,
+    "shelf": "F1",
+    "qlooId": "54230DEF-F685-4DEA-BEAF-69D59D5D361A",
+    "qlooName": "Educated",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "54230DEF-F685-4DEA-BEAF-69D59D5D361A",
+        "name": "Educated"
+      },
+      {
+        "id": "D812EC93-DDB1-46C0-98AF-B804E9F3D0DA",
+        "name": "The Amazing Maurice and His Educated Rodents: The Play"
+      },
+      {
+        "id": "5746CF6A-68FE-4EB8-9CB7-40A8594506DD",
+        "name": "The Well-Educated Mind: A Guide to the Classical Education You Never Had"
+      }
+    ]
+  },
+  {
+    "id": "44",
+    "title": "Where the Crawdads Sing",
+    "author": "Delia Owens",
+    "isbn": "9780735219090",
+    "price": 18,
+    "stock": 4,
+    "shelf": "B6",
+    "qlooId": "66A21442-9087-4239-A713-F5B011E6A622",
+    "qlooName": "Where the Crawdads Sing",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "66A21442-9087-4239-A713-F5B011E6A622",
+        "name": "Where the Crawdads Sing"
+      },
+      {
+        "id": "DF2AE66E-FC61-4E52-A72B-BA2E9803A8CE",
+        "name": "Where the Crawdads Sing / American Dirt"
+      },
+      {
+        "id": "7C968895-6512-44F5-9F21-DF7381932575",
+        "name": "Where the Bluebird Sings to the Lemonade Springs"
+      }
+    ]
+  },
+  {
+    "id": "45",
+    "title": "The Power",
+    "author": "Naomi Alderman",
+    "isbn": "9780316547611",
+    "price": 17,
+    "stock": 2,
+    "shelf": "C4",
+    "qlooId": "E67EC862-26D6-45EC-BEA9-7332A1203852",
+    "qlooName": "The Power",
+    "needsReview": false,
+    "candidates": [
+      {
+        "id": "E67EC862-26D6-45EC-BEA9-7332A1203852",
+        "name": "The Power"
+      },
+      {
+        "id": "FE2EDE77-4232-46E6-A9A3-20C1D194E931",
+        "name": "The Power of Habit: Why We Do What We Do in Life and Business"
+      },
+      {
+        "id": "AC668803-0F67-4853-97E9-0CC591C29C2D",
+        "name": "The Power of One (The Power of One, #1)"
+      }
+    ]
+  }
+]

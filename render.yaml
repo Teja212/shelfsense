@@ -1,0 +1,18 @@
+# One-click deploy on Render (single instance → the in-memory store persists
+# for the life of the demo, so owner edits and out-of-stock re-plans work live).
+# After connecting the repo, set QLOO_API_KEY and DEEPSEEK_API_KEY in the
+# dashboard (they are marked sync:false so they are never committed).
+services:
+  - type: web
+    name: shelfsense
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: QLOO_API_KEY
+        sync: false
+      - key: DEEPSEEK_API_KEY
+        sync: false
+      - key: NODE_VERSION
+        value: "20"

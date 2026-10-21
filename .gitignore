@@ -1,0 +1,24 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next
+/out
+
+# env — NEVER commit the Qloo key
+.env
+.env.local
+.env*.local
+
+# typescript
+next-env.d.ts
+*.tsbuildinfo
+
+# runtime Qloo call log
+/data/provenance.json
+
+# internal planning doc — not for the public repo
+/PLAN.md
+
+# misc
+.DS_Store
