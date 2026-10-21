@@ -20,6 +20,10 @@ export type Book = {
 
 const DATA_FILE = path.join(process.cwd(), "data", "inventory.json");
 const KEY = "shelfsense:inventory";
+const VKEY = "shelfsense:seed_version";
+// Bump whenever the seed's shape or contents change (e.g. added page counts),
+// so a stale Redis copy auto-re-seeds on the next request after deploy.
+const SEED_VERSION = "2";
 
 // Storage strategy:
 //  - With Upstash configured (production on Vercel): the inventory lives in
@@ -41,10 +45,12 @@ async function readSeed(): Promise<Book[]> {
 export async function loadInventory(): Promise<Book[]> {
   const r = redis();
   if (r) {
-    let data = await r.get<Book[]>(KEY);
+    const ver = await r.get<string>(VKEY);
+    let data = ver === SEED_VERSION ? await r.get<Book[]>(KEY) : null;
     if (!data || !Array.isArray(data) || data.length === 0) {
       data = await readSeed();
       await r.set(KEY, data);
+      await r.set(VKEY, SEED_VERSION);
     }
     return data;
   }
@@ -65,8 +71,10 @@ export async function saveInventory(books: Book[]): Promise<void> {
 export async function resetInventory(): Promise<number> {
   const seed = await readSeed();
   const r = redis();
-  if (r) await r.set(KEY, seed);
-  else memCache = seed;
+  if (r) {
+    await r.set(KEY, seed);
+    await r.set(VKEY, SEED_VERSION);
+  } else memCache = seed;
   return seed.length;
 }
 

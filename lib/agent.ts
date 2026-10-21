@@ -1,7 +1,24 @@
 import { search, rankBooks, type RankedBook } from "./qloo";
 import { loadInventory, type Book } from "./inventory";
-import { llmAvailable, planConstraints, groundedWhys } from "./llm";
+import { llmAvailable, planConstraints, groundedWhys, type ConstraintPlan } from "./llm";
 import { buildThreads, type Thread } from "./thread";
+
+// Deterministic parse of numeric limits, so "under 200 pages" / "under $15"
+// hold regardless of whether the model call succeeds. Price requires a "$" so
+// "under 200 pages" is never read as a price.
+function parseNumeric(request: string): { maxPages?: number; maxPrice?: number } {
+  const out: { maxPages?: number; maxPrice?: number } = {};
+  const pg =
+    request.match(
+      /(?:under|below|less than|fewer than|at most|no more than|max(?:imum)?(?: of)?)\s*(\d{2,4})\s*-?\s*(?:pages?|pp)\b/i
+    ) || request.match(/\b(\d{2,4})\s*(?:pages?|pp)\b\s*or\s*(?:fewer|less)/i);
+  if (pg) out.maxPages = Number(pg[1]);
+  const pr = request.match(
+    /(?:under|below|less than|at most|no more than|cheaper than|max(?:imum)?(?: of)?)\s*\$\s*(\d{1,4})/i
+  );
+  if (pr) out.maxPrice = Number(pr[1]);
+  return out;
+}
 
 // The ShelfSense agent. An async generator that yields its reasoning steps as
 // it works, then a final result. Every pick is grounded in Qloo data and real
@@ -119,6 +136,7 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
     .map((s) => s?.trim())
     .filter(Boolean)
     .join("; ");
+  let warnUnapplied = false;
 
   if (input.justRemoved) {
     yield { type: "step", text: `"${input.justRemoved}" is out of stock — re-planning from what's on the shelf…` };
@@ -207,13 +225,18 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
     return;
   }
 
-  // 5. Turn the request into hard constraints (applied here, deterministically)
-  // plus a soft ordering (from the model). Hard constraints MUST be honored.
+  // 5. Turn the request into hard constraints + soft ordering. Numeric limits
+  // (pages/price) are parsed deterministically so they hold even if the model
+  // call fails; author/title limits come from the model. Hard constraints MUST
+  // be honored — on an unrecoverable model failure we say so rather than
+  // silently returning unconstrained picks.
   if (request) {
+    const numeric = parseNumeric(request);
+    let plan: ConstraintPlan | null = null;
     if (llmAvailable()) {
       yield { type: "step", text: `Reasoning over your request: "${request}"…` };
       try {
-        const plan = await planConstraints({
+        plan = await planConstraints({
           favorites: favLabels,
           request,
           candidates: enriched.map((e) => ({
@@ -225,51 +248,69 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
             affinity: e.affinity ?? 0,
           })),
         });
-        if (plan) {
-          const h = plan.hard || {};
-          const inc = (h.authorsInclude || []).map((s) => s.toLowerCase());
-          const exc = (h.authorsExclude || []).map((s) => s.toLowerCase());
-          const exTitles = (h.excludeTitles || []).map((s) => s.toLowerCase());
-          const match = (a: string, list: string[]) =>
-            list.some((x) => a.toLowerCase().includes(x) || x.includes(a.toLowerCase()));
-
-          const before = enriched.length;
-          let filtered = enriched.filter((e) => {
-            if (inc.length && !match(e.book.author, inc)) return false;
-            if (exc.length && match(e.book.author, exc)) return false;
-            if (exTitles.length && match(e.book.title, exTitles)) return false;
-            if (typeof h.maxPrice === "number" && e.book.price > h.maxPrice) return false;
-            if (typeof h.maxPages === "number" && e.book.pages > 0 && e.book.pages > h.maxPages) return false;
-            return true;
-          });
-          const removed = before - filtered.length;
-
-          if (plan.orderedQlooIds.length) {
-            const order = new Map(plan.orderedQlooIds.map((id, i) => [id, i] as const));
-            filtered = [...filtered].sort((a, b) => (order.get(a.id) ?? 999) - (order.get(b.id) ?? 999));
-          }
-          enriched = filtered;
-
-          const bits: string[] = [];
-          if (inc.length) bits.push(`only ${h.authorsInclude!.join(", ")}`);
-          if (exc.length) bits.push(`excluding ${h.authorsExclude!.join(", ")}`);
-          if (typeof h.maxPrice === "number") bits.push(`≤ $${h.maxPrice}`);
-          if (typeof h.maxPages === "number") bits.push(`≤ ${h.maxPages} pages`);
-          yield {
-            type: "step",
-            text: bits.length
-              ? `Enforced your requirements: ${bits.join("; ")}.`
-              : "Adjusted the shortlist for your request.",
-            detail:
-              removed > 0
-                ? `removed ${removed} that didn't qualify${plan.rationale ? " · " + plan.rationale : ""}`
-                : plan.rationale || undefined,
-          };
-        }
       } catch {
-        yield { type: "step", text: "(Couldn't apply that via the model — using the taste ranking as-is.)" };
+        plan = null;
       }
-    } else {
+    }
+
+    const h: ConstraintPlan["hard"] = { ...(plan?.hard || {}) };
+    if (numeric.maxPages != null) h.maxPages = Math.min(h.maxPages ?? Infinity, numeric.maxPages);
+    if (numeric.maxPrice != null) h.maxPrice = Math.min(h.maxPrice ?? Infinity, numeric.maxPrice);
+
+    const inc = (h.authorsInclude || []).map((s) => s.toLowerCase());
+    const exc = (h.authorsExclude || []).map((s) => s.toLowerCase());
+    const exTitles = (h.excludeTitles || []).map((s) => s.toLowerCase());
+    const match = (a: string, list: string[]) =>
+      list.some((x) => a.toLowerCase().includes(x) || x.includes(a.toLowerCase()));
+    const hasHard =
+      inc.length > 0 ||
+      exc.length > 0 ||
+      exTitles.length > 0 ||
+      typeof h.maxPrice === "number" ||
+      typeof h.maxPages === "number";
+
+    if (hasHard || plan) {
+      const before = enriched.length;
+      let filtered = enriched.filter((e) => {
+        if (inc.length && !match(e.book.author, inc)) return false;
+        if (exc.length && match(e.book.author, exc)) return false;
+        if (exTitles.length && match(e.book.title, exTitles)) return false;
+        if (typeof h.maxPrice === "number" && e.book.price > h.maxPrice) return false;
+        // Strict page limit: a book with unknown length is excluded, not slipped through.
+        if (typeof h.maxPages === "number" && (!(e.book.pages > 0) || e.book.pages > h.maxPages)) return false;
+        return true;
+      });
+      const removed = before - filtered.length;
+
+      if (plan?.orderedQlooIds.length) {
+        const order = new Map(plan.orderedQlooIds.map((id, i) => [id, i] as const));
+        filtered = [...filtered].sort((a, b) => (order.get(a.id) ?? 999) - (order.get(b.id) ?? 999));
+      }
+      enriched = filtered;
+
+      const bits: string[] = [];
+      if (inc.length) bits.push(`only ${h.authorsInclude!.join(", ")}`);
+      if (exc.length) bits.push(`excluding ${h.authorsExclude!.join(", ")}`);
+      if (typeof h.maxPrice === "number") bits.push(`≤ $${h.maxPrice}`);
+      if (typeof h.maxPages === "number") bits.push(`≤ ${h.maxPages} pages`);
+      yield {
+        type: "step",
+        text: bits.length
+          ? `Enforced your requirements: ${bits.join("; ")}.`
+          : "Adjusted the shortlist for your request.",
+        detail:
+          removed > 0
+            ? `removed ${removed} that didn't qualify${plan?.rationale ? " · " + plan.rationale : ""}`
+            : plan?.rationale || undefined,
+      };
+    } else if (llmAvailable() && !plan) {
+      // Model failed and nothing deterministic was parsed — be honest.
+      warnUnapplied = true;
+      yield {
+        type: "step",
+        text: "(Couldn't apply your request via the model — showing taste-ranked picks; try again to enforce it.)",
+      };
+    } else if (!llmAvailable()) {
       yield { type: "step", text: `Noted your request: "${request}".` };
     }
   }
@@ -297,7 +338,13 @@ export async function* runAgent(input: AgentInput): AsyncGenerator<AgentEvent> {
     }
   }
 
-  yield { type: "result", picks };
+  yield {
+    type: "result",
+    picks,
+    note: warnUnapplied
+      ? "Your specific request couldn't be applied this run — these are taste-ranked. Try again to enforce it."
+      : undefined,
+  };
 
   // 7. The cultural thread — the real shared Qloo tags linking the favorites to
   // each pick. Streamed after the picks so it animates in as a reveal.
